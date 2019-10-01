@@ -23,23 +23,28 @@ jobs:
 
     steps:
       - checkout
-
+      - restore_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+#      - run:
+#         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
+#         command: sudo chmod +x ./gradlew
+      - run:
+          name: build
+          command: ./gradlew build
       # Download and cache dependencies
   #    - restore_cache:
   #        keys:
   #          - v1-dependencies-{{ checksum "build.gradle" }}
   #          # fallback to using the latest cache if no exact match is found
   #          - v1-dependencies-
-
+  #
   #    - run: gradle dependencies
-
+  #
   #    - save_cache:
   #        paths:
   #          - ~/.gradle
   #        key: v1-dependencies-{{ checksum "build.gradle" }}
-
+  #
       # run tests!
   #    - run: gradle test
-  
-       - name: build
-         run: ./gradlew build
+
