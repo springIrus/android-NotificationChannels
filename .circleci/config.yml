@@ -40,4 +40,6 @@ jobs:
 
       # run tests!
   #    - run: gradle test
-       - run: ./gradlew build
+  
+       - name: build
+         run: ./gradlew build
